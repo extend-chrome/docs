@@ -3,13 +3,11 @@ import Image from 'next/image'
 <Image
   width={200}
   height={200}
-  src="/rollup-plugin-logo.png"
+  src="/logo-rollup-plugin.png"
   alt="rollup-plugin-chrome-extension logo"
 />
 
-<h3 align="center">rollup-plugin-chrome-extension</h3>
-
-<div align="center">
+### rollup-plugin-chrome-extension
 
 [![npm (scoped)](https://img.shields.io/npm/v/rollup-plugin-chrome-extension.svg)](https://www.npmjs.com/package/rollup-plugin-chrome-extension)
 [![GitHub last commit](https://img.shields.io/github/last-commit/extend-chrome/rollup-plugin-chrome-extension.svg?logo=github)](https://github.com/extend-chrome/rollup-plugin-chrome-extension)
@@ -17,14 +15,8 @@ import Image from 'next/image'
 [![Codecov](https://img.shields.io/codecov/c/github/extend-chrome/rollup-plugin-chrome-extension)](https://codecov.io/gh/extend-chrome/rollup-plugin-chrome-extension)
 [![TypeScript Declarations Included](https://img.shields.io/badge/types-TypeScript-informational)](#typescript)
 
-</div>
-
-<div align="center">
-
 [![Chrome Extension Tutorials on YouTube](https://img.shields.io/badge/Chrome%20Extension%20Tutorials-YouTube-c4302b.svg)](https://www.youtube.com/channel/UCVj3dGw75v8aHFYD6CL1tFg)
 [![ko-fi](https://img.shields.io/badge/Buy%20us%20a%20tea-ko--fi-29ABE0)](https://ko-fi.com/jacksteam)
-
-</div>
 
 ---
 
@@ -138,107 +130,66 @@ extension! 🚗
 
 ### ⭐️ It's all in the Manifest
 
-<div style={{paddingLeft: '30px', paddingBottom: '10px'}}>
+#### Why does the `rollup.config.js` only need the manifest as an entry point?
 
-<details>
-  <summary>
-    Why does the `rollup.config.js` only need the manifest as an entry point?
-  </summary>
-  <br />
-  `rollup-plugin-chrome-extension` parses your manifest and bundles the scripts
-  in your background page, content scripts, option page and popup page
-</details>
+`rollup-plugin-chrome-extension` parses your manifest and bundles the scripts in
+your background page, content scripts, option page and popup page
 
-<details>
-  <summary>
-    Does that include the scripts in the Options page and Popup page?
-  </summary>
-  <br />
-  `rollup-plugin-chrome-extension` uses the JS or even TS files in your HTML
-  files as entry points. Shared code is split out into chunks automatically, so
-  libraries like React and Lodash aren't bundled into your extension multiple
-  times.
-</details>
+#### Does that include the scripts in the Options page and Popup page?
 
-<details>
-  <summary>
-    What happens with the assets? Like images, icons or css files?
-  </summary>
-  <br />
-  All assets declared in the manifest (including files in
-  `web_accessible_resources`, any image, icon, font, and even CSS files) are
-  automatically copied into the output folder. Even the images in your HTML
-  files get copied over. NOTE: This only includes assets in the html itself. If
-  you import images or CSS in a JavaScript file, you will need an additional
-  plugin.
-</details>
+`rollup-plugin-chrome-extension` uses the JS or even TS files in your HTML files
+as entry points. Shared code is split out into chunks automatically, so
+libraries like React and Lodash aren't bundled into your extension multiple
+times.
 
-<details>
-  <summary>Is the Manifest validated?</summary>
-  <br />
-  `rollup-plugin-chrome-extension` validates your output manifest, so you
-  discover mistakes when you build, not in a cryptic Chrome alert later.
-</details>
+#### What happens with the assets? Like images, icons or css files?
 
-<details>
-  <summary>Does it detect permissions automatically?</summary>
-  <br />
-  `rollup-plugin-chrome-extension` statically analyzes your bundled code,
-  detects any required permissions and adds them to the manifest in the `dist`
-  folder. Any permissions in the source manifest are always included.
-</details>
+All assets declared in the manifest (including files in
+`web_accessible_resources`, any image, icon, font, and even CSS files) are
+automatically copied into the output folder. Even the images in your HTML files
+get copied over. NOTE: This only includes assets in the html itself. If you
+import images or CSS in a JavaScript file, you will need an additional plugin.
 
-<details>
-<summary>Do I have to copy/paste the package.json fields to the Manifest?</summary>
-<br/>
-You can omit `manifest_version`, `version`, `name`, and
-`description` from your source `manifest.json`. We'll fill them
-out automatically from your `package.json`, if you use an npm
-script to run Rollup. Just manage your version number in
-`package.json` and it will reflect in your extension build.
+#### Is the Manifest validated?
+
+`rollup-plugin-chrome-extension` validates your output manifest, so you discover
+mistakes when you build, not in a cryptic Chrome alert later.
+
+#### Does it detect permissions automatically?
+
+`rollup-plugin-chrome-extension` statically analyzes your bundled code, detects
+any required permissions and adds them to the manifest in the `dist` folder. Any
+permissions in the source manifest are always included.
+
+#### Do I have to copy/paste the package.json fields to the Manifest?
+
+You can omit `manifest_version`, `version`, `name`, and `description` from your source
+`manifest.json`. We'll fill them out automatically from your `package.json`, if you
+use an npm script to run Rollup. Just manage your version number in `package.json`
+and it will reflect in your extension build.
 
 Don't worry, any value in your source manifest will take over! 😉
 
-</details>
-
-</div>
-
 ### ⭐️ Reload Your Extension Automatically
 
-<div style={{paddingLeft: '30px', paddingBottom: '10px'}}>
+#### Does this mean I don't have to manually reload my extension during development?
 
-<details>
-  <summary>
-    Does this mean I don't have to manually reload my extension during
-    development?
-  </summary>
-  <br />
-  Improve your development experience with our reloader! You won't have to
-  reload your Chrome extension every time you make a change to your code. We
-  know what a pain it can be to forget and wonder, "Why isn't this change
-  working? 😟".
-</details>
+Improve your development experience with our reloader! You won't have to reload
+your Chrome extension every time you make a change to your code. We know what a
+pain it can be to forget and wonder, "Why isn't this change working? 😟".
 
-<details>
-  <summary>
-    Does it also reload the pages I am injecting content scripts?
-  </summary>
-  <br />
-  Ever got the error `"Extension context invalidated"` in your content script?
-  That happens when the extension reloads but the content script doesn't. Our
-  reloader makes sure that doesn't happen by reloading your content scripts when
-  it reloads your extension automatically.
-</details>
+#### Does it also reload the pages I am injecting content scripts?
 
-<details>
-  <summary>How do I enable the reloader?</summary>
-  <br />
-  If you include the helper plugin `simpleReloader` in your config, when Rollup
-  is in watch mode your background page will include an auto-reloader script.
-  This will reload your extension every time Rollup produces a new build.
-</details>
+Ever got the error `"Extension context invalidated"` in your content script?
+That happens when the extension reloads but the content script doesn't. Our
+reloader makes sure that doesn't happen by reloading your content scripts when
+it reloads your extension automatically.
 
-</div>
+#### How do I enable the reloader?
+
+If you include the helper plugin `simpleReloader` in your config, when Rollup is
+in watch mode your background page will include an auto-reloader script. This
+will reload your extension every time Rollup produces a new build.
 
 ### ⭐️ Write Chrome Extensions In TypeScript
 
