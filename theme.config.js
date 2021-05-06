@@ -1,11 +1,13 @@
 export default {
-  repository: 'https://github.com/shuding/nextra',
-  titleSuffix: ' – Nextra',
+  repository: 'https://github.com/extend-chrome',
+  titleSuffix: ' – Extend Chrome',
   logo: (
     <>
-      <span className="mr-2 font-extrabold hidden md:inline">Nextra</span>
+      <span className="mr-2 font-extrabold hidden md:inline">
+        Extend Chrome
+      </span>
       <span className="text-gray-600 font-normal hidden md:inline">
-        The Next.js Site Builder
+        Making Chrome extension development fast and easy
       </span>
     </>
   ),
@@ -60,6 +62,6 @@ export default {
   prevLinks: true,
   nextLinks: true,
   footer: true,
-  footerEditOnGitHubLink: true,
-  footerText: <>MIT {new Date().getFullYear()} © Nextra.</>,
+  footerEditOnGitHubLink: false,
+  footerText: <>MIT {new Date().getFullYear()} © Extend Chrome.</>,
 }
