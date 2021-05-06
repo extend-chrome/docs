@@ -1,4 +1,12 @@
 {
-  "index": "What is Extend Chrome",
-  "projects": "Projects"
+  "index": "Introduction",
+  "projects": "Projects",
+  "rollup-plugin": "Building with Rollup",
+  "jest-chrome": "Testing with Jest",
+  "clipboard": "Clipboard",
+  "storage": "Storage",
+  "messages": "Messages",
+  "boilerplates": "Boilerplates",
+  "menus": "Menus",
+  "notify": "Notify"
 }

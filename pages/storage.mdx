@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Badge from '../components/Badge'
 
 <Image
   width={200}
@@ -9,19 +10,40 @@ import Image from 'next/image'
 
 # @extend-chrome/storage
 
-[![npm (scoped)](https://img.shields.io/npm/v/@extend-chrome/storage.svg)](https://www.npmjs.com/package/@extend-chrome/storage)
-[![GitHub last commit](https://img.shields.io/github/last-commit/extend-chrome/storage.svg)](https://github.com/extend-chrome/storage)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
-[![TypeScript Declarations Included](https://img.shields.io/badge/types-TypeScript-informational)](#typescript)
+<p>
+  <Badge
+    alt="npm (scoped)"
+    href="https://www.npmjs.com/package/@extend-chrome/storage"
+    src="https://img.shields.io/npm/v/@extend-chrome/storage.svg"
+  />
+  <Badge
+    alt="GitHub last commit"
+    href="https://github.com/extend-chrome/storage"
+    src="https://img.shields.io/github/last-commit/extend-chrome/storage.svg"
+  />
+  <Badge
+    alt="License"
+    src="https://img.shields.io/badge/license-MIT-blue.svg"
+  />
+  <Badge
+    alt="TypeScript Declarations Included"
+    src="https://img.shields.io/badge/types-TypeScript-informational"
+  />
+  <Badge
+    alt="ko-fi"
+    href="http://bit.ly/2qmaQYB"
+    src="https://img.shields.io/badge/ko--fi-Buy%20me%20a%20coffee-ff5d5b"
+  />
+</p>
 
-[![ko-fi](https://img.shields.io/badge/ko--fi-Buy%20me%20a%20coffee-ff5d5b)](http://bit.ly/2qmaQYB)
+---
 
 Manage Chrome Extension storage easily with `@extend-chrome/storage`.
 
 This is a wrapper for the Chrome Extension Storage API that adds
 [great TypeScript support](#features-typescript) using virtual storage buckets with a modern Promise-based API.
 
-# Getting started
+## Getting started
 
 You will need to use a bundler like
 [Rollup](https://rollupjs.org/guide/en/), Parcel, or Webpack to
@@ -30,13 +52,13 @@ include this library in your Chrome extension.
 See [`rollup-plugin-chrome-extension`](http://bit.ly/35hLMR8) for
 an easy way to use Rollup to build your Chrome extension!
 
-## Installation
+### Installation
 
 ```sh
 npm i @extend-chrome/storage
 ```
 
-# Usage
+## Usage
 
 Add the `storage` permission to your `manifest.json` file.
 
@@ -73,9 +95,9 @@ storage.get({ friends: [], enemies: [] }).then(({ friends, enemies }) => {
 })
 ```
 
-# Features
+## Features
 
-## Virtual typed storage buckets
+### Virtual typed storage buckets
 
 This library allows you to create a storage area and define the
 type of data that area will manage.
@@ -97,7 +119,7 @@ store.set({ c: true }) // ts error
 store.set(({ a }) => ({ d: 'invalid' })) // ts error
 ```
 
-## Promises and functional setters
+### Promises and functional setters
 
 The Chrome Storage API is asynchronous. This means synchronous
 calls to `get` and `set` will not reflect pending changes. This
@@ -113,7 +135,7 @@ returns a Promise and both `get` and `set` can take a function
 that provides current storage values, similar to React's
 `this.setState`.
 
-## Composed set operations
+### Composed set operations
 
 The `set` method can be called with a function (setter) as well
 as the normal types (a string, array of strings, or an object).
@@ -147,9 +169,9 @@ An individual call to `set` will reject if the setter function
 throws an error or returns an invalid type, but will not affect
 other set operations.
 
-# API
+## API
 
-## interface `Bucket`
+### interface `Bucket`
 
 A synthetic storage area. It has the same methods as the native
 Chrome API StorageArea, but `get` and `set` can take a function as an
@@ -196,12 +218,12 @@ Buckets really shine if you're using TypeScript, because you can
 define the types your bucket will contain.
 [Click here for more details.](#features-typescript)
 
-## async function `bucket.get`
+### async function `bucket.get`
 
 Takes an optional getter. Resolves to an object with the
 requested storage area values.
 
-### Parameters
+#### Parameters
 
 ```typescript
 function get(getter?: string | object | Function) => Promise<{ [key: string]: any }>
@@ -232,12 +254,12 @@ bucket.get({ a: 123 }) // same, but 123 is default value
 bucket.get(({ a }) => a) // resolves to value of "a"
 ```
 
-## async function `bucket.set`
+### async function `bucket.set`
 
 Set a value or values in storage. Takes a setter `object` or
 `function`. Resolves to the new bucket values.
 
-### Parameters
+#### Parameters
 
 ```typescript
 function set(setter: object | Function) => Promise<{ [key: string]: any }>
@@ -290,7 +312,7 @@ bucket
   })
 ```
 
-## async function `bucket.remove`
+### async function `bucket.remove`
 
 Remove a value or values from storage. Resolves when the
 operation is complete.
@@ -300,7 +322,7 @@ bucket.remove('a')
 bucket.remove(['a', 'b'])
 ```
 
-## async function `bucket.clear`
+### async function `bucket.clear`
 
 Empties only this bucket. Resolves when the operation is
 complete. Other buckets are untouched.
@@ -309,7 +331,7 @@ complete. Other buckets are untouched.
 bucket.clear()
 ```
 
-## async function `bucket.changeStream`
+### async function `bucket.changeStream`
 
 An RxJs Observable that emits a
 [StorageChange](https://developer.chrome.com/extensions/storage#type-StorageChange)
@@ -322,7 +344,7 @@ bucket.changeStream.pipe(filter(({ a }) => !!a)).subscribe(({ a }) => {
 })
 ```
 
-## async function `bucket.valueStream`
+### async function `bucket.valueStream`
 
 An Observable that emits all the values in storage immediately,
 and when `onChanged` fires.
@@ -333,7 +355,7 @@ bucket.valueStream.subscribe((values) => {
 })
 ```
 
-## function `getBucket`
+### function `getBucket`
 
 Create a [bucket](#api-bucket) (a synthetic storage area). Takes
 a string `bucketName` and an optional string `areaName`. Returns
@@ -344,7 +366,7 @@ everywhere, including privileged pages and content scripts.
 `getBucket` is a TypeScript Generic. Pass it an interface to
 define the types to expect in your storage area.
 
-### Parameters
+#### Parameters
 
 ```typescript
 function getBucket(bucketName: string, areaName?: 'local' | 'sync') => Bucket
