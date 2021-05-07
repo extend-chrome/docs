@@ -17,13 +17,12 @@ import Badge from '../components/Badge'
     src="https://img.shields.io/npm/v/rollup-plugin-chrome-extension.svg"
   />
   <Badge
-    alt="github"
-    href="https://www.npmjs.com/package/rollup-plugin-chrome-extension"
+    alt="GitHub"
+    href="https://github.com/extend-chrome/rollup-plugin-chrome-extension"
     src="https://img.shields.io/github/last-commit/extend-chrome/rollup-plugin-chrome-extension.svg"
   />
   <Badge
     alt="CircleCI"
-    href="https://www.npmjs.com/package/rollup-plugin-chrome-extension"
     src="https://img.shields.io/circleci/build/github/extend-chrome/rollup-plugin-chrome-extension?token=31f554b1e0c742c0ed5ccab825000c78e65791ba"
   />
   <Badge
@@ -74,7 +73,7 @@ Special thanks to [@kyrelldixon](https://www.kyrelldixon.com/) for this [Svelte 
 git clone https://github.com/kyrelldixon/svelte-tailwind-extension-boilerplate.git
 ```
 
-### I want to do it myself
+### Install
 
 ```sh
 npm i rollup rollup-plugin-chrome-extension@latest -D
@@ -82,7 +81,7 @@ npm i rollup rollup-plugin-chrome-extension@latest -D
 
 Install the plugins
 [Node Resolve](https://www.npmjs.com/package/@rollup/plugin-node-resolve)
-and [CommonJS](https://github.com/rollup/@rollup/plugin-commonjs)
+and [CommonJS](https://www.npmjs.com/package/@rollup/plugin-commonjs)
 if you plan to use npm modules.
 
 ```sh
@@ -142,12 +141,11 @@ Your extension build will be in the `dist` folder. It has
 everything it needs: manifest, scripts, and assets (images, css,
 etc...).
 
-Load it in Chrome `chrome://extensions/` to test drive your
-extension! 🚗
+Load it in Chrome `chrome://extensions/` to test drive your extension!
 
 ## Features
 
-### ⭐️ It's all in the Manifest
+### It's all in the Manifest
 
 #### Why does the `rollup.config.js` only need the manifest as an entry point?
 
@@ -189,7 +187,7 @@ and it will reflect in your extension build.
 
 Don't worry, any value in your source manifest will take over! 😉
 
-### ⭐️ Reload Your Extension Automatically
+### Reload Your Extension Automatically
 
 #### Does this mean I don't have to manually reload my extension during development?
 
@@ -210,7 +208,7 @@ If you include the helper plugin `simpleReloader` in your config, when Rollup is
 in watch mode your background page will include an auto-reloader script. This
 will reload your extension every time Rollup produces a new build.
 
-### ⭐️ Write Chrome Extensions In TypeScript
+### Write Chrome Extensions In TypeScript
 
 #### Includes Chrome extension API types
 
@@ -225,27 +223,37 @@ additional `@types` library!
 
 ---
 
-### ⭐️ Use ES2015 Modules In Your Scripts
+### Use ES2015 Modules In Your Scripts
 
-Chrome extensions don't support modules in background and content scripts. We've developed a [module loader](https://github.com/extend-chrome/rollup-plugin-chrome-extension/blob/master/API.md#options-dynamic-import-wrapper) specifically for Chrome extension scripts, so you can take advantage of Rollup's great code splitting features.
+Chrome extensions don't support modules in background and content 
+scripts. We've created a module loader specifically for Chrome 
+extension scripts, so you can take advantage of Rollup's great 
+code splitting features. It's enabled by default!
 
-### ⭐️ How does the dynamic import wrapper work?
+#### How does the module loader work?
 
-TLDR; RPCE parses the manifest and replaces any script path with an IIFE wrapper that loads the script using a [dynamic import statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#dynamic_imports).
+TLDR; RPCE parses the manifest and replaces any script path with an 
+IIFE wrapper that loads the script using a [dynamic import statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#dynamic_imports).
 
-> See [Why do we need to use dynamic import in scripts?](https://github.com/extend-chrome/rollup-plugin-chrome-extension/blob/master/API.md#why-do-we-need-to-use-dynamic-import-in-scripts) for the reasons we need dynamic imports.
-> Content scripts are pretty straight forward, and the wrapper they use is just an IIFE that loads the script and logs any import errors.
+> See [Why do we need to use dynamic import in scripts?](https://github.com/extend-chrome/rollup-plugin-chrome-extension/blob/master/API.md#why-do-we-need-to-use-dynamic-import-in-scripts) 
+for the reasons we need dynamic imports.
+> Content scripts are pretty straight forward, and the wrapper 
+they use is just an IIFE that loads the script and logs any import 
+errors.
 > Background pages need a special wrapper because [wake events](https://developer.chrome.com/docs/extensions/mv2/background_pages/) (onInstalled, onMessage, etc...) fire before the import completes. We make sure we don’t miss any events by capturing all events that occur before the import promise resolves and then re-dispatch them after the import completes.
 
 ---
 
-### ⭐️ What About FireFox Support?
+### What About Firefox Support?
 
-Until v89, [Firefox did not support dynamic imports in web extensions](https://bugzilla.mozilla.org/show_bug.cgi?id=1536094), so any scripts needed to be in another format, like IIFE. The suggested solution was to run Parcel on the Rollup output, but this won’t be necessary once **Firefox v89** is [released](https://wiki.mozilla.org/Release_Management/Release_owners).
+Until v89, [Firefox did not support dynamic imports in web extensions](https://bugzilla.mozilla.org/show_bug.cgi?id=1536094), 
+so any scripts needed to be in another format, like IIFE. 
+The suggested solution was to run Parcel on the Rollup output, but 
+this won’t be necessary once **Firefox v89** is [released](https://www.mozilla.org/en-US/firefox/89.0/releasenotes/).
 
 ---
 
-### ⭐️ Use Promises like it's 2021
+### Use Promises like it's 2021
 
 Add the excellent [promisified Browser API polyfill](https://github.com/mozilla/webextension-polyfill) by Mozilla to your
 Chrome extension with one easy option:
@@ -260,7 +268,7 @@ This option adds `browser` to the global scope, so you don't need to import anyt
 
 ---
 
-### ⭐️ Plugins Take It To The Next Level
+### Plugins Take It To The Next Level
 
 Take advantage of other great Rollup plugins to do awesome things
 with your Chrome extensions!
@@ -284,7 +292,7 @@ Two of our own plugins:
 - Empty your output folder before a new build with
   [`rollup-plugin-empty-dir`](https://www.npmjs.com/package/rollup-plugin-empty-dir)
 
-### ⭐️ Outputs a Chrome Web Store friendly bundle
+### Outputs a Chrome Web Store friendly bundle
 
 Every time you publish your Chrome extension to the Web Store,
 your extension will be reviewed by a robot and then a human to
@@ -452,7 +460,7 @@ properties. Everything is optional.
 
 #### `[browserPolyfill]`
 
-Add the excellent [promisified Browser API]() by Mozilla to your
+Add the excellent [promisified Browser API](https://github.com/mozilla/webextension-polyfill) by Mozilla to your
 Chrome extension with one easy option:
 
 ```javascript
@@ -492,27 +500,26 @@ Events that wake (reactivate) an extension may be lost if that
 extension uses dynamic imports to load modules or asynchronously
 adds event listeners.
 
-List events that will wake your background page (for example,
-`'chrome.tabs.onUpdated'`, or `'chrome.runtime.onInstalled'`).
 The script module loader will defer them until after all the
-background script modules have fully loaded.
+background script modules have fully loaded. Once this is complete,
+the listeners are removed.
 
-> It may be possible to statically analyze the background page
-> code to detect which events the extension uses. Like
-> [this issue]() if this is something that interests you!
+By default the module loader will iterate through the events 
+available on the Chrome API object and add listeners to each one. 
+Since the manifest permissions determine which Chrome namespaces 
+are available, only a small superset of the events you use will be 
+used.
+
+If you want to limit the number of events that the module loader
+uses, you can list the events that should wake your background page 
+(for example, `'chrome.tabs.onUpdated'`, or `'chrome.runtime.onInstalled'`).
+
 
 ```javascript
 // Example usage
 chromeExtension({
   dynamicImportWrapper: {
     wakeEvents: ['chrome.contextMenus.onClicked'],
-  },
-})
-
-// Default value
-chromeExtension({
-  dynamicImportWrapper: {
-    wakeEvents: ['chrome.runtime.onInstalled', 'chrome.runtime.onMessage'],
   },
 })
 ```

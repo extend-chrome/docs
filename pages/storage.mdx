@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import Badge from '../components/Badge'
 
 <Image
@@ -23,6 +24,7 @@ import Badge from '../components/Badge'
   />
   <Badge
     alt="License"
+    href="https://github.com/extend-chrome/storage/blob/da73df78a30cc4b7341695988acc42ef9d927991/LICENSE"
     src="https://img.shields.io/badge/license-MIT-blue.svg"
   />
   <Badge
@@ -41,7 +43,7 @@ import Badge from '../components/Badge'
 Manage Chrome Extension storage easily with `@extend-chrome/storage`.
 
 This is a wrapper for the Chrome Extension Storage API that adds
-[great TypeScript support](#features-typescript) using virtual storage buckets with a modern Promise-based API.
+[great TypeScript support](#virtual-typed-storage-buckets) using virtual storage buckets with a modern Promise-based API.
 
 ## Getting started
 
@@ -49,7 +51,7 @@ You will need to use a bundler like
 [Rollup](https://rollupjs.org/guide/en/), Parcel, or Webpack to
 include this library in your Chrome extension.
 
-See [`rollup-plugin-chrome-extension`](http://bit.ly/35hLMR8) for
+See <Link href="/rollup-plugin">rollup-plugin-chrome-extension</Link> for
 an easy way to use Rollup to build your Chrome extension!
 
 ### Installation
@@ -176,11 +178,10 @@ other set operations.
 A synthetic storage area. It has the same methods as the native
 Chrome API StorageArea, but `get` and `set` can take a function as an
 argument. A `Bucket` can use
-[either local or sync storage](https://developer.chrome.com/extensions/storage#using-sync).
+[either local or sync storage](https://developer.chrome.com/docs/extensions/reference/storage/#usage).
 
 Multiple synchronous calls to set are composed into one call to
-the native Chrome API
-[`StorageArea.set`](https://developer.chrome.com/extensions/storage#method-StorageArea-set).
+the native Chrome API `StorageArea.set`.
 
 Default storage areas are included, so you can just import
 `storage` if you're don't care about types and only need one
@@ -193,7 +194,7 @@ storage.local.set({ a: 'abc' })
 storage.sync.set({ b: 123 })
 ```
 
-Create a bucket or two using [`getBucket`](#api-getBucket):
+Create a bucket or two using [`getBucket`](#async-function-bucketget):
 
 ```javascript
 import { getBucket } from '@extend-chrome/storage'
@@ -216,7 +217,7 @@ bucket2.get() // { a: 'abc' }
 
 Buckets really shine if you're using TypeScript, because you can
 define the types your bucket will contain.
-[Click here for more details.](#features-typescript)
+[Click here for more details.](#virtual-typed-storage-buckets)
 
 ### async function `bucket.get`
 
@@ -357,9 +358,9 @@ bucket.valueStream.subscribe((values) => {
 
 ### function `getBucket`
 
-Create a [bucket](#api-bucket) (a synthetic storage area). Takes
+Create a [bucket](#interface-bucket) (a synthetic storage area). Takes
 a string `bucketName` and an optional string `areaName`. Returns
-a [`Bucket`](#api-bucket) synthetic storage area. Export this
+a `Bucket` synthetic storage area. Export this
 bucket and use it throughout your Chrome extension. It will work
 everywhere, including privileged pages and content scripts.
 
@@ -379,7 +380,7 @@ A unique id for this bucket.
 **`[areaName]`**\
 Type: `"local"` or `"sync"`\
 Default: `"local"`\
-Choose which [native Chrome API storage area](https://developer.chrome.com/extensions/storage#using-sync)
+Choose which [native Chrome API storage area](https://developer.chrome.com/docs/extensions/reference/storage/#usage)
 to use.
 
 ```typescript
