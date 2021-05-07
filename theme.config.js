@@ -1,5 +1,5 @@
 export default {
-  repository: 'https://github.com/extend-chrome',
+  repository: 'https://github.com/jacksteamdev/extend-chrome-docs',
   titleSuffix: ' – Extend Chrome',
   logo: (
     <>
@@ -7,7 +7,7 @@ export default {
         Extend Chrome
       </span>
       <span className="text-gray-600 font-normal hidden md:inline">
-        Smart Chrome extension development
+        Smart Chrome Extension Development
       </span>
     </>
   ),
@@ -26,11 +26,11 @@ export default {
         content="Extend Chrome: Smart Chrome extension development"
       />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:image" content="https://nextra.vercel.app/og.png" />
-      <meta name="twitter:site:domain" content="nextra.vercel.app" />
-      <meta name="twitter:url" content="https://nextra.vercel.app" />
+      <meta name="twitter:image" content="https://extend-chrome.dev/og.png" />
+      <meta name="twitter:site:domain" content="extend-chrome.dev" />
+      <meta name="twitter:url" content="https://extend-chrome.dev" />
       <meta name="og:title" content="Extend Chrome: Smart Chrome extension development" />
-      <meta name="og:image" content="https://nextra.vercel.app/og.png" />
+      <meta name="og:image" content="https://extend-chrome.dev/og.png" />
       <meta name="apple-mobile-web-app-title" content="Extend Chrome" />
       <link
         rel="apple-touch-icon"
@@ -61,7 +61,7 @@ export default {
         sizes="16x16"
         href="/favicon-16x16.png"
       />
-      <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+      <meta name="msapplication-TileImage" content="https://extend-chrome.dev/ms-icon-144x144.png" />
     </>
   ),
   search: true,
