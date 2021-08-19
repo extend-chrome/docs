@@ -9,6 +9,7 @@ specifiers:
   prismjs: ^1.23.0
   react: ^17.0.1
   react-dom: ^17.0.1
+  react-tagcloud: ^2.1.1
 
 dependencies:
   next: 10.2.0_react-dom@17.0.2+react@17.0.2
@@ -18,6 +19,7 @@ dependencies:
   prismjs: 1.23.0
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
+  react-tagcloud: 2.1.1_react@17.0.2
 
 devDependencies:
   prettier: 2.2.1
@@ -2545,6 +2547,10 @@ packages:
       safe-buffer: 5.2.1
     dev: false
 
+  /randomcolor/0.5.4:
+    resolution: {integrity: sha512-nYd4nmTuuwMFzHL6W+UWR5fNERGZeVauho8mrJDUSXdNDbao4rbrUwhuLgKC/j8VCS5+34Ria8CsTDuBjrIrQA==}
+    dev: false
+
   /randomfill/1.0.4:
     resolution: {integrity: sha512-87lcbR8+MhcWcUiQ+9e+Rwx8MyR2P7qnt15ynUlbm3TU/fjbgz4GsvfSUDTemtCCtVCqb4ZcEFlyPNTh9bBTLw==}
     dependencies:
@@ -2589,6 +2595,17 @@ packages:
   /react-refresh/0.8.3:
     resolution: {integrity: sha512-X8jZHc7nCMjaCqoU+V2I0cOhNW+QMBwSUkeXnTi8IPe6zaRWfn60ZzvFDZqWPfmSJfjub7dDW1SP0jaHWLu/hg==}
     engines: {node: '>=0.10.0'}
+    dev: false
+
+  /react-tagcloud/2.1.1_react@17.0.2:
+    resolution: {integrity: sha512-cM96jzUOKQqu2qlzwcO91r239MSDbFiAslFNk4Hja3MaZ4Y89goIzbTyXZwonkeJck1zY5wkNhJYeJ8YSdOwXg==}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      prop-types: 15.7.2
+      randomcolor: 0.5.4
+      react: 17.0.2
+      shuffle-array: 1.0.1
     dev: false
 
   /react/17.0.2:
@@ -2781,6 +2798,10 @@ packages:
 
   /shell-quote/1.7.2:
     resolution: {integrity: sha512-mRz/m/JVscCrkMyPqHc/bczi3OQHkLTqXHEFu0zDhK/qfv3UcOA4SVmRCLmos4bhjr9ekVQubj/R7waKapmiQg==}
+    dev: false
+
+  /shuffle-array/1.0.1:
+    resolution: {integrity: sha1-xP88/nTRb5NzBZIwGyXmV3sSiYs=}
     dev: false
 
   /signal-exit/3.0.3:

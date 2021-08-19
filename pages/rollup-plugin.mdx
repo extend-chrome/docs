@@ -1,11 +1,14 @@
 import Image from 'next/image'
 import Badge from '../components/Badge'
+import TagCloud from '../components/TagCloud'
+import BackToTop from '../components/BackToTop.js'
 
 <Image
   width={200}
   height={200}
   src="/logo-rollup-plugin.png"
   alt="rollup-plugin-chrome-extension logo"
+  id="top"
 />
 
 # rollup-plugin-chrome-extension
@@ -22,13 +25,8 @@ import Badge from '../components/Badge'
     src="https://img.shields.io/github/last-commit/extend-chrome/rollup-plugin-chrome-extension.svg"
   />
   <Badge
-    alt="CircleCI"
-    src="https://img.shields.io/circleci/build/github/extend-chrome/rollup-plugin-chrome-extension?token=31f554b1e0c742c0ed5ccab825000c78e65791ba"
-  />
-  <Badge
-    href="https://codecov.io/gh/extend-chrome/rollup-plugin-chrome-extension"
-    alt="Codecov"
-    src="https://img.shields.io/codecov/c/github/extend-chrome/rollup-plugin-chrome-extension"
+    alt="GitHub Action"
+    src="https://github.com/extend-chrome/rollup-plugin-chrome-extension/actions/workflows/main.yml/badge.svg"
   />
   <Badge
     alt="TypeScript"
@@ -38,11 +36,13 @@ import Badge from '../components/Badge'
 
 ---
 
-A feature-rich solution for bundled Chrome extensions! 💯
-
-Build Chrome extensions using
+Build Chrome Extensions using
 [Rollup](https://rollupjs.org/guide/en/), with
-[minimal configuration](#usage).
+[minimal configuration](https://www.extend-chrome.dev/rollup-plugin#usage).
+
+Here's some of the things this Rollup plugin does:
+
+<TagCloud />
 
 Use `manifest.json` as the input. Every file in the manifest will
 be bundled or copied to the output folder.
@@ -152,14 +152,14 @@ Load it in Chrome `chrome://extensions/` to test drive your extension!
 `rollup-plugin-chrome-extension` parses your manifest and bundles the scripts in
 your background page, content scripts, option page and popup page
 
-#### Does that include the scripts in the Options page and Popup page?
+#### What about HTML pages, like popup or options?
 
 `rollup-plugin-chrome-extension` uses the JS or even TS files in your HTML files
 as entry points. Shared code is split out into chunks automatically, so
 libraries like React and Lodash aren't bundled into your extension multiple
 times.
 
-#### What happens with the assets? Like images, icons or css files?
+#### What about the assets? Like images, icons or css files?
 
 All assets declared in the manifest (including files in
 `web_accessible_resources`, any image, icon, font, and even CSS files) are
@@ -167,25 +167,41 @@ automatically copied into the output folder. Even the images in your HTML files
 get copied over. NOTE: This only includes assets in the html itself. If you
 import images or CSS in a JavaScript file, you will need an additional plugin.
 
-#### Is the Manifest validated?
+<BackToTop />
+
+### Is the Manifest validated?
 
 `rollup-plugin-chrome-extension` validates your output manifest, so you discover
 mistakes when you build, not in a cryptic Chrome alert later.
 
-#### Does it detect permissions automatically?
+<BackToTop />
+
+### Does it detect permissions automatically?
 
 `rollup-plugin-chrome-extension` statically analyzes your bundled code, detects
 any required permissions and adds them to the manifest in the `dist` folder. Any
 permissions in the source manifest are always included.
 
-#### Do I have to copy/paste the package.json fields to the Manifest?
+<BackToTop />
+
+### Do I have to copy/paste the package.json fields to the Manifest?
 
 You can omit `manifest_version`, `version`, `name`, and `description` from your source
 `manifest.json`. We'll fill them out automatically from your `package.json`, if you
 use an npm script to run Rollup. Just manage your version number in `package.json`
 and it will reflect in your extension build.
 
-Don't worry, any value in your source manifest will take over! 😉
+Don't worry, any value in your source manifest will be used first! 😉
+
+<BackToTop />
+
+### What about Manifest Version 3?
+
+[Manifest Version 3](https://developer.chrome.com/docs/extensions/mv3/intro/) is here! Google is recommending that developers adopt the new format as soon as possible, and `rollup-plugin-chrome-extension` is fully compatible with Manifest Version 3.
+
+Just follow the [migration guide](https://developer.chrome.com/docs/extensions/mv3/intro/mv3-migration/), setting `manifest_version` to `3`, and we've got your back! No additional Rollup configuration required.
+
+<BackToTop />
 
 ### Reload Your Extension Automatically
 
@@ -208,48 +224,64 @@ If you include the helper plugin `simpleReloader` in your config, when Rollup is
 in watch mode your background page will include an auto-reloader script. This
 will reload your extension every time Rollup produces a new build.
 
+<BackToTop />
+
 ### Write Chrome Extensions In TypeScript
 
-#### Includes Chrome extension API types
-
-If you use the
+If you use
 [`@rollup/plugin-typescript`](https://www.npmjs.com/package/@rollup/plugin-typescript),
 you can write your Chrome extension in TypeScript. That's right,
 it bundles the scripts in your manifest and in your HTML script
 tags.
 
-TypeScript definitions are included, so no need to install an
-additional `@types` library!
+Be sure to install [`@types/chrome`](https://www.npmjs.com/package/@types/chrome) to add TypeScript support for the Chrome API.
+
+#### Can I write my Manifest in TypeScript?
+
+Yes, you can! You can even use environment variables. Just make sure your manifest file name starts with `manifest` so we don't include it in the build files.
+
+```typescript
+import { ManifestV3 } from 'rollup-plugin-chrome-extension'
+
+const manifest: ManifestV3 = {
+  manifest_version: 3,
+  background: {
+    service_worker: 'service-worker.ts',
+  },
+  content_scripts: [
+    {
+      js: ['content-script.ts'],
+      matches: ['https://*.example.com/*'],
+    },
+  ],
+}
+
+export default manifest
+```
+
+<BackToTop />
 
 ---
 
 ### Use ES2015 Modules In Your Scripts
 
-Chrome extensions don't support modules in background and content 
-scripts. We've created a module loader specifically for Chrome 
-extension scripts, so you can take advantage of Rollup's great 
+Chrome extensions don't support modules in content
+scripts. We've created a module loader specifically for Chrome
+extension scripts, so you can take advantage of Rollup's great
 code splitting features. It's enabled by default!
 
-#### How does the module loader work?
-
-TLDR; RPCE parses the manifest and replaces any script path with an 
-IIFE wrapper that loads the script using a [dynamic import statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#dynamic_imports).
-
-> See [Why do we need to use dynamic import in scripts?](https://github.com/extend-chrome/rollup-plugin-chrome-extension/blob/master/API.md#why-do-we-need-to-use-dynamic-import-in-scripts) 
-for the reasons we need dynamic imports.
-> Content scripts are pretty straight forward, and the wrapper 
-they use is just an IIFE that loads the script and logs any import 
-errors.
-> Background pages need a special wrapper because [wake events](https://developer.chrome.com/docs/extensions/mv2/background_pages/) (onInstalled, onMessage, etc...) fire before the import completes. We make sure we don’t miss any events by capturing all events that occur before the import promise resolves and then re-dispatch them after the import completes.
+<BackToTop />
 
 ---
 
 ### What About Firefox Support?
 
-Until v89, [Firefox did not support dynamic imports in web extensions](https://bugzilla.mozilla.org/show_bug.cgi?id=1536094), 
-so any scripts needed to be in another format, like IIFE. 
-The suggested solution was to run Parcel on the Rollup output, but 
+Until v89, [Firefox did not support dynamic imports in web extensions](https://bugzilla.mozilla.org/show_bug.cgi?id=1536094),
+so any scripts needed to be in another format, like IIFE.
+The suggested solution was to run Parcel on the Rollup output, but
 this won’t be necessary once **Firefox v89** is [released](https://www.mozilla.org/en-US/firefox/89.0/releasenotes/).
+
+<BackToTop />
 
 ---
 
@@ -265,6 +297,8 @@ chromeExtension({ browserPolyfill: true })
 This option adds `browser` to the global scope, so you don't need to import anything.
 
 [Install this type package](https://www.npmjs.com/package/@types/firefox-webext-browser) to get Intellisense. It's automatically updated on a regular basis.
+
+<BackToTop />
 
 ---
 
@@ -291,6 +325,8 @@ Two of our own plugins:
   [`rollup-plugin-bundle-imports`](https://www.npmjs.com/package/rollup-plugin-bundle-imports)
 - Empty your output folder before a new build with
   [`rollup-plugin-empty-dir`](https://www.npmjs.com/package/rollup-plugin-empty-dir)
+
+<BackToTop />
 
 ### Outputs a Chrome Web Store friendly bundle
 
@@ -325,6 +361,8 @@ extensions go from over 8Mb to less than 1Mb just by switching
 from `create-react-app` to Rollup. A smaller bundle means less
 code to review, and less room for error during the review
 process.
+
+<BackToTop />
 
 ## API
 
@@ -504,16 +542,15 @@ The script module loader will defer them until after all the
 background script modules have fully loaded. Once this is complete,
 the listeners are removed.
 
-By default the module loader will iterate through the events 
-available on the Chrome API object and add listeners to each one. 
-Since the manifest permissions determine which Chrome namespaces 
-are available, only a small superset of the events you use will be 
+By default the module loader will iterate through the events
+available on the Chrome API object and add listeners to each one.
+Since the manifest permissions determine which Chrome namespaces
+are available, only a small superset of the events you use will be
 used.
 
 If you want to limit the number of events that the module loader
-uses, you can list the events that should wake your background page 
+uses, you can list the events that should wake your background page
 (for example, `'chrome.tabs.onUpdated'`, or `'chrome.runtime.onInstalled'`).
-
 
 ```javascript
 // Example usage
@@ -581,7 +618,7 @@ chromeExtension({
 })
 ```
 
-#### `[publicKey]`
+#### `[publicKey]` (deprecated)
 
 If truthy, `manifest.key` will be set to this value. Use this
 feature to
