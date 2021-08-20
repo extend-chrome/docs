@@ -6,9 +6,9 @@ const Badge = ({ alt, href, src }) =>
       <img alt={alt} src={src} />
     </a>
   ) : (
-    <div className="inline-block mr-1">
+    <span className="inline-block mr-1">
       <img alt={alt} src={src} />
-    </div>
+    </span>
   )
 
 export default Badge

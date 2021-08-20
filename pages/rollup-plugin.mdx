@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Badge from '../components/Badge'
-import TagCloud from '../components/TagCloud'
+import TagCloud, { TagAnchor } from '../components/TagCloud'
 import BackToTop from '../components/BackToTop.js'
 
 <Image
@@ -147,6 +147,8 @@ Load it in Chrome `chrome://extensions/` to test drive your extension!
 
 ### It's all in the Manifest
 
+<TagAnchor value="Parse manifest.json" count={35} />
+
 #### Why does the `rollup.config.js` only need the manifest as an entry point?
 
 `rollup-plugin-chrome-extension` parses your manifest and bundles the scripts in
@@ -154,12 +156,16 @@ your background page, content scripts, option page and popup page
 
 #### What about HTML pages, like popup or options?
 
+<TagAnchor value="Parse HTML pages" count={35} />
+
 `rollup-plugin-chrome-extension` uses the JS or even TS files in your HTML files
 as entry points. Shared code is split out into chunks automatically, so
 libraries like React and Lodash aren't bundled into your extension multiple
 times.
 
 #### What about the assets? Like images, icons or css files?
+
+<TagAnchor value="Copy assets" count={25} />
 
 All assets declared in the manifest (including files in
 `web_accessible_resources`, any image, icon, font, and even CSS files) are
@@ -171,12 +177,16 @@ import images or CSS in a JavaScript file, you will need an additional plugin.
 
 ### Is the Manifest validated?
 
+<TagAnchor value="Validate the manifest" count={28} />
+
 `rollup-plugin-chrome-extension` validates your output manifest, so you discover
 mistakes when you build, not in a cryptic Chrome alert later.
 
 <BackToTop />
 
 ### Does it detect permissions automatically?
+
+<TagAnchor value="Detect permissions" count={24} />
 
 `rollup-plugin-chrome-extension` statically analyzes your bundled code, detects
 any required permissions and adds them to the manifest in the `dist` folder. Any
@@ -185,6 +195,8 @@ permissions in the source manifest are always included.
 <BackToTop />
 
 ### Do I have to copy/paste the package.json fields to the Manifest?
+
+<TagAnchor value="Update manifest version" count={15} />
 
 You can omit `manifest_version`, `version`, `name`, and `description` from your source
 `manifest.json`. We'll fill them out automatically from your `package.json`, if you
@@ -197,6 +209,8 @@ Don't worry, any value in your source manifest will be used first! 😉
 
 ### What about Manifest Version 3?
 
+<TagAnchor value="Manifest Version 3" count={50} />
+
 [Manifest Version 3](https://developer.chrome.com/docs/extensions/mv3/intro/) is here! Google is recommending that developers adopt the new format as soon as possible, and `rollup-plugin-chrome-extension` is fully compatible with Manifest Version 3.
 
 Just follow the [migration guide](https://developer.chrome.com/docs/extensions/mv3/intro/mv3-migration/), setting `manifest_version` to `3`, and we've got your back! No additional Rollup configuration required.
@@ -204,6 +218,8 @@ Just follow the [migration guide](https://developer.chrome.com/docs/extensions/m
 <BackToTop />
 
 ### Reload Your Extension Automatically
+
+<TagAnchor value="Auto Reloader" count={75} />
 
 #### Does this mean I don't have to manually reload my extension during development?
 
@@ -228,6 +244,8 @@ will reload your extension every time Rollup produces a new build.
 
 ### Write Chrome Extensions In TypeScript
 
+<TagAnchor value="TypeScript" count={50} />
+
 If you use
 [`@rollup/plugin-typescript`](https://www.npmjs.com/package/@rollup/plugin-typescript),
 you can write your Chrome extension in TypeScript. That's right,
@@ -237,6 +255,8 @@ tags.
 Be sure to install [`@types/chrome`](https://www.npmjs.com/package/@types/chrome) to add TypeScript support for the Chrome API.
 
 #### Can I write my Manifest in TypeScript?
+
+<TagAnchor value="Alternate manifest formats" count={35} />
 
 Yes, you can! You can even use environment variables. Just make sure your manifest file name starts with `manifest` so we don't include it in the build files.
 
@@ -265,6 +285,8 @@ export default manifest
 
 ### Use ES2015 Modules In Your Scripts
 
+<TagAnchor value="ESM" count={45} />
+
 Chrome extensions don't support modules in content
 scripts. We've created a module loader specifically for Chrome
 extension scripts, so you can take advantage of Rollup's great
@@ -286,6 +308,8 @@ this won’t be necessary once **Firefox v89** is [released](https://www.mozilla
 ---
 
 ### Use Promises like it's 2021
+
+<TagAnchor value="Promises" count={15} />
 
 Add the excellent [promisified Browser API polyfill](https://github.com/mozilla/webextension-polyfill) by Mozilla to your
 Chrome extension with one easy option:
@@ -329,6 +353,8 @@ Two of our own plugins:
 <BackToTop />
 
 ### Outputs a Chrome Web Store friendly bundle
+
+<TagAnchor value="Chrome Web Store friendly" count={27} />
 
 Every time you publish your Chrome extension to the Web Store,
 your extension will be reviewed by a robot and then a human to
