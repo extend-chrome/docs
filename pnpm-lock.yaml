@@ -5,6 +5,7 @@ specifiers:
   next: ^10.0.8-canary.9
   nextra: ^0.4.1
   nextra-theme-docs: ^1.1.2
+  posthog-js: ^1.16.2
   prettier: ^2.0.5
   prism-react-renderer: ^1.2.0
   prismjs: ^1.23.0
@@ -17,6 +18,7 @@ dependencies:
   next: 10.2.0_react-dom@17.0.2+react@17.0.2
   nextra: 0.4.4_react@17.0.2
   nextra-theme-docs: 1.1.6_3a7f9b0847035abd95643f9e1809652e
+  posthog-js: 1.16.2
   prism-react-renderer: 1.2.0_react@17.0.2
   prismjs: 1.23.0
   react: 17.0.2
@@ -223,6 +225,11 @@ packages:
     dependencies:
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
+    dev: false
+
+  /@sentry/types/6.14.1:
+    resolution: {integrity: sha512-RIk3ZwQKZnASrYWfV5i4wbzVveHz8xLFAS2ySIMqh+hICKnB0N4/r8a1Of/84j7pj+iAbf5vPS85639eIf+9qg==}
+    engines: {node: '>=6'}
     dev: false
 
   /@sindresorhus/is/0.7.0:
@@ -1113,6 +1120,10 @@ packages:
     resolution: {integrity: sha1-JcfInLH5B3+IkbvmHY85Dq4lbx4=}
     dependencies:
       pend: 1.2.0
+    dev: false
+
+  /fflate/0.4.8:
+    resolution: {integrity: sha512-FJqqoDBR00Mdj9ppamLa/Y7vxm+PRmNWA67N846RvsoYVMKB4q3y/de5PA7gUmRMYK/8CMz2GDZQmCRN1wBcWA==}
     dev: false
 
   /file-type/11.1.0:
@@ -2436,6 +2447,14 @@ packages:
       source-map: 0.6.1
     dev: false
 
+  /posthog-js/1.16.2:
+    resolution: {integrity: sha512-UQYind/RgcL11b78ImNXyrvaVG9a8Rff45e//X+2ETgZjEqF5/c7odndqxWdsMqB5/+1v6YQUko8/cO/FTrM6w==}
+    dependencies:
+      '@sentry/types': 6.14.1
+      fflate: 0.4.8
+      rrweb-snapshot: 1.1.9
+    dev: false
+
   /prepend-http/2.0.0:
     resolution: {integrity: sha1-6SQ0v6XqjBn0HN/UAddBo8gZ2Jc=}
     engines: {node: '>=4'}
@@ -2719,6 +2738,10 @@ packages:
     dependencies:
       hash-base: 3.1.0
       inherits: 2.0.4
+    dev: false
+
+  /rrweb-snapshot/1.1.9:
+    resolution: {integrity: sha512-kpoWi2gx1AmX2PZU8XNKMvIvh5WPSz9lKfyHs9GYvczYE2H7VNrmPf7+rDin8Y+HcJ9Tu7x9id4JOCD2PsSPQA==}
     dev: false
 
   /safe-buffer/5.1.2:
