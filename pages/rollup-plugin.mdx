@@ -40,12 +40,17 @@ Build Chrome Extensions using
 [Rollup](https://rollupjs.org/guide/en/), with
 [minimal configuration](https://www.extend-chrome.dev/rollup-plugin#usage).
 
-Here's some of the things this Rollup plugin does:
+Here are some of the things this Rollup plugin does:
 
 <TagCloud />
 
 Use `manifest.json` as the input. Every file in the manifest will
 be bundled or copied to the output folder.
+
+## Looking for Vite support?
+
+Vite support is in beta! [Get started with HMR and React in 90 seconds.](https://dev.to/jacksteamdev/create-a-vite-react-chrome-extension-in-90-seconds-3df7)
+The documentation on this site does not cover Vite, but you can [get help on GitHub.](https://github.com/extend-chrome/rollup-plugin-chrome-extension/discussions/136)
 
 ## Getting started
 
@@ -138,21 +143,21 @@ npm run build
 ```
 
 Your extension build will be in the `dist` folder. It has
-everything it needs: manifest, scripts, and assets (images, css,
-etc...).
+everything it needs: manifest, scripts, and assets (images, CSS,
+etc.).
 
 Load it in Chrome `chrome://extensions/` to test drive your extension!
 
 ## Features
 
-### It's all in the Manifest
+### It's all in the manifest
 
 <TagAnchor value="Parse manifest.json" count={35} />
 
 #### Why does the `rollup.config.js` only need the manifest as an entry point?
 
 `rollup-plugin-chrome-extension` parses your manifest and bundles the scripts in
-your background page, content scripts, option page and popup page
+your background page, content scripts, options page, and popup page
 
 #### What about HTML pages, like popup or options?
 
@@ -163,14 +168,14 @@ as entry points. Shared code is split out into chunks automatically, so
 libraries like React and Lodash aren't bundled into your extension multiple
 times.
 
-#### What about the assets? Like images, icons or css files?
+#### What about the assets? Like images, icons, or CSS files?
 
 <TagAnchor value="Copy assets" count={25} />
 
 All assets declared in the manifest (including files in
 `web_accessible_resources`, any image, icon, font, and even CSS files) are
 automatically copied into the output folder. Even the images in your HTML files
-get copied over. NOTE: This only includes assets in the html itself. If you
+get copied over. NOTE: This only includes assets in the HTML itself. If you
 import images or CSS in a JavaScript file, you will need an additional plugin.
 
 <BackToTop />
@@ -189,21 +194,21 @@ mistakes when you build, not in a cryptic Chrome alert later.
 <TagAnchor value="Detect permissions" count={24} />
 
 `rollup-plugin-chrome-extension` statically analyzes your bundled code, detects
-any required permissions and adds them to the manifest in the `dist` folder. Any
+any required permissions, and adds them to the manifest in the `dist` folder. Any
 permissions in the source manifest are always included.
 
 <BackToTop />
 
-### Do I have to copy/paste the package.json fields to the Manifest?
+### Do I have to copy/paste the package.json fields to the manifest?
 
 <TagAnchor value="Update manifest version" count={15} />
 
 You can omit `manifest_version`, `version`, `name`, and `description` from your source
-`manifest.json`. We'll fill them out automatically from your `package.json`, if you
+`manifest.json`. We'll fill them out automatically from your `package.json` if you
 use an npm script to run Rollup. Just manage your version number in `package.json`
 and it will reflect in your extension build.
 
-Don't worry, any value in your source manifest will be used first! 😉
+Don't worry. Any value in your source manifest will be used first! 😉
 
 <BackToTop />
 
@@ -213,7 +218,7 @@ Don't worry, any value in your source manifest will be used first! 😉
 
 [Manifest Version 3](https://developer.chrome.com/docs/extensions/mv3/intro/) is here! Google is recommending that developers adopt the new format as soon as possible, and `rollup-plugin-chrome-extension` is fully compatible with Manifest Version 3.
 
-Just follow the [migration guide](https://developer.chrome.com/docs/extensions/mv3/intro/mv3-migration/), setting `manifest_version` to `3`, and we've got your back! No additional Rollup configuration required.
+Just follow the [migration guide](https://developer.chrome.com/docs/extensions/mv3/intro/mv3-migration/), setting `manifest_version` to `3`, and we've got your back! No additional Rollup configuration is required.
 
 <BackToTop />
 
@@ -230,14 +235,13 @@ pain it can be to forget and wonder, "Why isn't this change working? 😟".
 #### Does it also reload the pages I am injecting content scripts?
 
 Ever got the error `"Extension context invalidated"` in your content script?
-That happens when the extension reloads but the content script doesn't. Our
+It happens when the extension reloads, but the content script doesn't. Our
 reloader makes sure that doesn't happen by reloading your content scripts when
 it reloads your extension automatically.
 
 #### How do I enable the reloader?
 
-If you include the helper plugin `simpleReloader` in your config, when Rollup is
-in watch mode your background page will include an auto-reloader script. This
+If you include the helper plugin `simpleReloader` in your config, your background page will include an auto-reloader script when Rollup is in watch mode. This
 will reload your extension every time Rollup produces a new build.
 
 <BackToTop />
@@ -248,8 +252,7 @@ will reload your extension every time Rollup produces a new build.
 
 If you use
 [`@rollup/plugin-typescript`](https://www.npmjs.com/package/@rollup/plugin-typescript),
-you can write your Chrome extension in TypeScript. That's right,
-it bundles the scripts in your manifest and in your HTML script
+you can write your Chrome extension in TypeScript. That's right. It bundles the scripts in your manifest and in your HTML script
 tags.
 
 Be sure to install [`@types/chrome`](https://www.npmjs.com/package/@types/chrome) to add TypeScript support for the Chrome API.
@@ -290,7 +293,7 @@ export default manifest
 Chrome extensions don't support modules in content
 scripts. We've created a module loader specifically for Chrome
 extension scripts, so you can take advantage of Rollup's great
-code splitting features. It's enabled by default!
+code-splitting features. It's enabled by default!
 
 <BackToTop />
 
