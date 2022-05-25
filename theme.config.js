@@ -1,5 +1,6 @@
 export default {
-  repository: 'https://github.com/jacksteamdev/extend-chrome-docs',
+  github: 'https://github.com/extend-chrome',
+  docsRepositoryBase: 'https://github.com/jacksteamdev/extend-chrome-docs/blob/master',
   titleSuffix: ' – Extend Chrome',
   logo: (
     <>
